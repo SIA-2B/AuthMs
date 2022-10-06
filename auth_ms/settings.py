@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'api',
+    'corsheaders',
 ]
 
 
@@ -52,7 +53,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    'http://172.17.0.3:8000',
+    'http://172.17.0.3:5000',
+]
+
+ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1','172.17.0.3']
 
 ROOT_URLCONF = 'auth_ms.urls'
 
@@ -90,13 +100,11 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'auth_db',
-        'PORT': 27017,
-        'HOST':'172.17.0.3'
+        'NAME': 'auth_db'
     }
-}'''
+}
 
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
