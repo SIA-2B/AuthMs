@@ -60,9 +60,10 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://172.17.0.3:8000',
     'http://172.17.0.3:5000',
+    'http://460c-2800-484-758c-505e-11bc-5646-1159-67cc.ngrok.io:8000'
 ]
 
-ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1','172.17.0.3']
+ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1','172.17.0.3','460c-2800-484-758c-505e-11bc-5646-1159-67cc.ngrok.io']
 
 ROOT_URLCONF = 'auth_ms.urls'
 
@@ -109,8 +110,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT': {
-            'host': '172.17.0.2',
-            'name': 'auth_db'
+            'host': 'mongodb+srv://developer:developer@cluster0.plbvdu3.mongodb.net/?retryWrites=true&w=majority',
+            'name': 'auth_db',
+            "username": 'developer',
+           "password": 'developer',
+           "authMechanism": "SCRAM-SHA-1",
         }
     }
 }
