@@ -59,20 +59,11 @@ CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://172.17.0.3:8000',
-    'http://172.17.0.4:8000',
-    'http://172.17.0.5:8000',
-    'http://172.17.0.2:8000',
     'http://172.17.0.3:5000',
-    'http://localhost:8000',
     'http://460c-2800-484-758c-505e-11bc-5646-1159-67cc.ngrok.io:8000'
 ]
 
-<<<<<<< HEAD
-# ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1','172.17.0.3','172.17.0.2','172.17.0.4','172.17.0.5','460c-2800-484-758c-505e-11bc-5646-1159-67cc.ngrok.io']
-ALLOWED_HOSTS = ['host.docker.internal']
-=======
 ALLOWED_HOSTS = ['host.docker.internal','localhost', '172.17.0.1']
->>>>>>> ef854b6607a49a2034173852f5a908cfd8b812c7
 
 ROOT_URLCONF = 'auth_ms.urls'
 

@@ -46,3 +46,15 @@ services:
     ports:
       - 5135:80
     container_name: financial_info_ms
+
+  rabbitmq3:
+    container_name: "rabbit"
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=grupo
+      - RABBITMQ_DEFAULT_PASS=123456789
+    ports:
+      # AMQP protocol port
+      - '5672:5672'
+      # HTTP management UI
+      - '15672:15672'
