@@ -44,5 +44,5 @@ services:
       context: C:\Users\Usuario\Documents\AUNIVERSIDAD\2022-Semestre-II\Arquisoft\sia\proyecto\financial_info_ms
       dockerfile: Dockerfile
     ports:
-      - 5135:5135
+      - 5135:80
     container_name: financial_info_ms
