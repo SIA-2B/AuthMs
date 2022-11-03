@@ -1,0 +1,48 @@
+version: latest
+
+services:
+  auth_serrvice:
+    restart: always
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    container_name: auth_service
+
+  apigateway_ag:
+    restart: always
+    build: 
+      context: C:\Users\Usuario\Documents\AUNIVERSIDAD\2022-Semestre-II\Arquisoft\api_gateway
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    container_name: api_gateway
+
+  
+  personalinfo_service:
+    restart: always
+    build: 
+      context: C:\Users\Usuario\Documents\AUNIVERSIDAD\2022-Semestre-II\Arquisoft\sia\proyecto\personal_info_ms
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    container_name: personal_info_ms
+
+  courses_service:
+    restart: always
+    build: 
+      context: C:\Users\Usuario\Documents\AUNIVERSIDAD\2022-Semestre-II\Arquisoft\sia\proyecto\courses_ms
+      dockerfile: Dockerfile
+    ports:
+      - 4001:4001
+    container_name: courses_ms
+
+  financial_service:
+    restart: always
+    build: 
+      context: C:\Users\Usuario\Documents\AUNIVERSIDAD\2022-Semestre-II\Arquisoft\sia\proyecto\financial_info_ms
+      dockerfile: Dockerfile
+    ports:
+      - 5135:80
+    container_name: financial_info_ms
