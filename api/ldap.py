@@ -31,5 +31,4 @@ def autenticacion_ldap(username, password):
 
     if d == z[1]:
         return 'Ldap login correcto'
-    else:
-        return 'Ldap login incorrect'
+    

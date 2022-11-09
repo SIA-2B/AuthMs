@@ -35,7 +35,7 @@ class PersonaList(generics.ListCreateAPIView):
 
 class CustomAuthToken(ObtainAuthToken):
 
-    print(ObtainAuthToken, 'este es el ObtainAuthToken')
+    #print(ObtainAuthToken, 'este es el ObtainAuthToken')
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data,
@@ -53,8 +53,6 @@ class CustomAuthToken(ObtainAuthToken):
                 'user_id': user.pk,
                 'email': user.email
             })
-        else:
-            return ldap_login
 
 
 class Login(FormView):
