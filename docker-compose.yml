@@ -62,3 +62,5 @@
         container_name: auth_service
         extra_hosts:
           - "host.docker.internal:host-gateway"
+          
+  
