@@ -1,48 +1,64 @@
-version: latest
+    version: "3.9"
 
-services:
-  auth_serrvice:
-    restart: always
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 8000:8000
-    container_name: auth_service
+    services:
+      seguridad-ldap:
+        image: osixia/openldap:1.1.8
+        container_name: seguridad_ldap
+        environment:
+          COMPOSE_HTTP_TIMEOUT: 200
+          LDAP_LOG_LEVEL: "256"
+          LDAP_ORGANISATION: "Sia Proyecto"
+          LDAP_DOMAIN: "sia.unal.edu.co"
+          LDAP_BASE_DN: ""
+          LDAP_ADMIN_PASSWORD: "admin"
+          LDAP_CONFIG_PASSWORD: "config"
+          LDAP_READONLY_USER: "false"
+          #LDAP_READONLY_USER_USERNAME: "readonly"
+          #LDAP_READONLY_USER_PASSWORD: "readonly"
+          LDAP_BACKEND: "hdb"
+          LDAP_TLS: "true"
+          LDAP_TLS_CRT_FILENAME: "ldap.crt"
+          LDAP_TLS_KEY_FILENAME: "ldap.key"
+          LDAP_TLS_CA_CRT_FILENAME: "ca.crt"
+          LDAP_TLS_ENFORCE: "false"
+          LDAP_TLS_CIPHER_SUITE: "SECURE256:-VERS-SSL3.0"
+          LDAP_TLS_PROTOCOL_MIN: "3.1"
+          LDAP_TLS_VERIFY_CLIENT: "demand"
+          LDAP_REPLICATION: "false"
+          #LDAP_REPLICATION_CONFIG_SYNCPROV: "binddn="cn=admin,cn=config" bindmethod=simple credentials=$LDAP_CONFIG_PASSWORD searchbase="cn=config" type=refreshAndPersist retry="60 +" timeout=1 starttls=critical"
+          #LDAP_REPLICATION_DB_SYNCPROV: "binddn="cn=admin,$LDAP_BASE_DN" bindmethod=simple credentials=$LDAP_ADMIN_PASSWORD searchbase="$LDAP_BASE_DN" type=refreshAndPersist interval=00:00:00:10 retry="60 +" timeout=1 starttls=critical"
+          #LDAP_REPLICATION_HOSTS: "#PYTHON2BASH:['ldap://ldap.example.org','ldap://ldap2.example.org']"
+          LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
+          LDAP_SSL_HELPER_PREFIX: "ldap"
+        tty: true
+        stdin_open: true
+        volumes:
+          - /var/lib/ldap
+          - /etc/ldap/slapd.d
+          - /container/service/slapd/assets/certs/
+        ports:
+          - "389:389"
+          - "636:636"
+        hostname: "arqsoft.unal.edu.co"
+      phpldapadmin:
+        image: osixia/phpldapadmin:latest
+        container_name: sia_ldap_client
+        environment:
+          PHPLDAPADMIN_LDAP_HOSTS: "seguridad-ldap"
+          PHPLDAPADMIN_HTTPS: "false"
+        ports:
+          - "8085:80"
+        links:
+          - seguridad-ldap
+      
 
-  apigateway_ag:
-    restart: always
-    build: 
-      context: C:\Users\Usuario\Documents\AUNIVERSIDAD\2022-Semestre-II\Arquisoft\api_gateway
-      dockerfile: Dockerfile
-    ports:
-      - 5000:5000
-    container_name: api_gateway
-
-  
-  personalinfo_service:
-    restart: always
-    build: 
-      context: C:\Users\Usuario\Documents\AUNIVERSIDAD\2022-Semestre-II\Arquisoft\sia\proyecto\personal_info_ms
-      dockerfile: Dockerfile
-    ports:
-      - 3000:3000
-    container_name: personal_info_ms
-
-  courses_service:
-    restart: always
-    build: 
-      context: C:\Users\Usuario\Documents\AUNIVERSIDAD\2022-Semestre-II\Arquisoft\sia\proyecto\courses_ms
-      dockerfile: Dockerfile
-    ports:
-      - 4001:4001
-    container_name: courses_ms
-
-  financial_service:
-    restart: always
-    build: 
-      context: C:\Users\Usuario\Documents\AUNIVERSIDAD\2022-Semestre-II\Arquisoft\sia\proyecto\financial_info_ms
-      dockerfile: Dockerfile
-    ports:
-      - 5135:80
-    container_name: financial_info_ms
+      auth_serrvice:
+        restart: always
+        build:
+          context: .
+          dockerfile: Dockerfile
+        ports:
+          - 8000:8000
+        container_name: auth_service
+        extra_hosts:
+          - "host.docker.internal:host-gateway"

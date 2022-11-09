@@ -19,6 +19,13 @@ from .serializers import PersonaSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 
 
+
+from rest_framework.schemas import ManualSchema
+from rest_framework.schemas import coreapi as coreapi_schema
+from rest_framework.compat import coreapi, coreschema
+from .ldap import autenticacion_ldap
+
+
 class PersonaList(generics.ListCreateAPIView):
     queryset = Persona.objects.all()
     serializer_class = PersonaSerializer
@@ -28,17 +35,26 @@ class PersonaList(generics.ListCreateAPIView):
 
 class CustomAuthToken(ObtainAuthToken):
 
+    print(ObtainAuthToken, 'este es el ObtainAuthToken')
+
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({
-            'token': token.key,
-            'user_id': user.pk,
-            'email': user.email
-        })
+        password = serializer.validated_data['password']
+        ldap_login = autenticacion_ldap(user,password)
+        print(ldap_login)
+        if ldap_login == 'Ldap login correcto':
+            token, created = Token.objects.get_or_create(user=user)
+            #print(user, password )
+            return Response({
+                'token': token.key,
+                'user_id': user.pk,
+                'email': user.email
+            })
+        else:
+            return ldap_login
 
 
 class Login(FormView):
