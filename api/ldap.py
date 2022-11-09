@@ -5,7 +5,7 @@ from ldap3 import Server, Connection, ALL
 
 
 def autenticacion_ldap(username, password):
-    server = Server('localhost',  get_info=ALL)
+    server = Server('host.docker.internal',  get_info=ALL)
     username = str(username)
     password = str(password)
     conn = Connection(server, 'cn=admin,dc=sia,dc=unal,dc=edu,dc=co', 'admin', auto_bind=True)
