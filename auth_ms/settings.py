@@ -63,7 +63,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://460c-2800-484-758c-505e-11bc-5646-1159-67cc.ngrok.io:8000'
 ]
 
-ALLOWED_HOSTS = ['host.docker.internal','localhost', '172.17.0.1']
+ALLOWED_HOSTS = ['host.docker.internal','localhost', '172.20.0.4']
 
 ROOT_URLCONF = 'auth_ms.urls'
 
