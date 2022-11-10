@@ -39,7 +39,7 @@
         ports:
           - "389:389"
           - "636:636"
-        hostname: "arqsoft.unal.edu.co"
+        hostname: "sia.unal.edu.co"
       phpldapadmin:
         image: osixia/phpldapadmin:latest
         container_name: sia_ldap_client
@@ -62,5 +62,5 @@
         container_name: auth_service
         extra_hosts:
           - "host.docker.internal:host-gateway"
-          
+
   

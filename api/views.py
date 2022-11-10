@@ -53,6 +53,8 @@ class CustomAuthToken(ObtainAuthToken):
                 'user_id': user.pk,
                 'email': user.email
             })
+        else:
+            return ldap_login
 
 
 class Login(FormView):
