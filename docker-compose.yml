@@ -63,4 +63,16 @@
         extra_hosts:
           - "host.docker.internal:host-gateway"
 
+      getway_service:
+        restart: always
+        build:
+          context: C:\Users\Usuario\Documents\AUNIVERSIDAD\2022-Semestre-II\Arquisoft\sia\proyecto\api_gateway
+          dockerfile: Dockerfile
+        ports:
+          - 5000:5000
+        networks:
+          vpcbr:
+            ipv4_address: 172.20.0.11
+        container_name: getway_service
+
   

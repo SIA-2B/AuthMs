@@ -43,6 +43,7 @@ class CustomAuthToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         password = serializer.validated_data['password']
+        '''
         ldap_login = autenticacion_ldap(user,password)
         print(ldap_login)
         if ldap_login == 'Ldap login correcto':
@@ -55,6 +56,13 @@ class CustomAuthToken(ObtainAuthToken):
             })
         else:
             return ldap_login
+        '''
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+                'user_id': user.pk,
+            'email': user.email
+        })
 
 
 class Login(FormView):
