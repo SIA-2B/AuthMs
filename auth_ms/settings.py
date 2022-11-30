@@ -106,15 +106,28 @@ DATABASES = {
 }
 
 '''
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'CLIENT': {
+#             'host': 'mongodb+srv://developer:developer@cluster0.plbvdu3.mongodb.net/?retryWrites=true&w=majority',
+#             'name': 'auth_db',
+#             "username": 'developer',
+#            "password": 'developer',
+#            "authMechanism": "SCRAM-SHA-1",
+#         }
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT': {
-            'host': 'mongodb+srv://developer:developer@cluster0.plbvdu3.mongodb.net/?retryWrites=true&w=majority',
+            'host': 'mongodb://academy:123456789@10.150.0.21:27017',
             'name': 'auth_db',
-            "username": 'developer',
-           "password": 'developer',
-           "authMechanism": "SCRAM-SHA-1",
+            "username": 'academy',
+           "password": '123456789',
+           "authSource": "admin",
         }
     }
 }
