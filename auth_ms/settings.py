@@ -123,11 +123,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT': {
-            'host': 'mongodb://academy:123456789@10.150.0.21:27017',
+            'host': 'mongodb://10.150.0.21:27017',
             'name': 'auth_db',
             "username": 'academy',
-           "password": '123456789',
-           "authSource": "admin",
+            "password": '123456789',
+            "authSource": "admin",
         }
     }
 }
