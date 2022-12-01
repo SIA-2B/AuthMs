@@ -123,7 +123,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT': {
-            'host': 'mongodb://10.150.0.21:27017',
+            'host': 'mongodb://10.150.0.22:27017',
             'name': 'auth_db',
             "username": 'academy',
             "password": '123456789',
